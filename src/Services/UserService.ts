@@ -22,6 +22,10 @@ export class UserService{ //Aqui é uma classe de service para toda a aplicaçã
         
     }
 
+    getAuthenticateUser =async (email: string, password: string): Promise<User | null> => {
+        return this.userRepository.getUserByEmailAndPassword(email, password)
+    }
+
     deleteUsers = () => {
 
     }

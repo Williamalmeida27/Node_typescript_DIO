@@ -23,8 +23,14 @@ export class UserController {
         return response.status(201).json({message: "Usuário criado"}) //Já aqui ao realizar o request o resposne vai dar uma mensagem
     }
     
-    getUser = (request: Request, response: Response) => { //Função que chama um metód do service que retorna todos os dados do db
-        return response.status(200)
+    getUser = async (request: Request, response: Response) => { //Função que chama um metód do service que retorna todos os dados do db
+        const {id} = request.params
+        const user = await this.userService.getUser(id)
+        return response.status(200).json({
+            id: user?.id,
+            name: user?.name,
+            email: user?.email
+        })
     }
 
     //Refatorado criado função de deletar usuário

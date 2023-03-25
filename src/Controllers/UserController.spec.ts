@@ -65,6 +65,20 @@ describe('UserController', ()=> {
         expect(MockResponse.state.json).toMatchObject({message:'Bad request! Todos os campos são obrigatórios'})
         
     });
+
+    it('Deve retornar um usuário pelo id', () => { //Teste se a rota por parametro funciona
+        const mockRequest = makeMockeRequest({
+            params: {
+                id: '12345'
+            }
+        })
+
+        userController.getUser(mockRequest, MockResponse)
+        expect(mockUserService.getUser).toHaveBeenCalledWith('12345')
+        expect(MockResponse.state.status).toBe(400)
+    });
+
+
     /*
 
     it('Deve a lista de usuários ', () => {
